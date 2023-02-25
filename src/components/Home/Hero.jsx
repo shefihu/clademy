@@ -2,6 +2,7 @@ import React from "react";
 import hero1 from "../../assets/images/hero1.png";
 import hero2 from "../../assets/images/hero2.png";
 import hero3 from "../../assets/images/hero3.png";
+import { motion } from "framer-motion";
 const Hero = () => {
   return (
     <div className="w-full pb-20 h-[100%]  pt-32 bg-[#FFF0e5]">
@@ -13,7 +14,7 @@ const Hero = () => {
             <span> new things</span>
           </h1>
           <p className="text-[22px] mt-10 text-[#707070]">
-            Clademy is your all-in-one place for teaching and enriching learning
+            clademy is your all-in-one place for teaching and enriching learning
             experiences.
           </p>
           <a
@@ -41,15 +42,25 @@ const Hero = () => {
           </a>
         </div>
         <div className="w-[48%] xl:h-[612px] lg:h-full h-full  relative ">
-          <div className="absolute top-14 lg:w-[192px] lg:h-[192px] xl:w-[232px] xl:h-[232px] bg-[#66c3fd] rounded-xl  left-0">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="absolute top-14 lg:w-[192px] lg:h-[192px] xl:w-[232px] xl:h-[232px] bg-[#66c3fd] rounded-xl  left-0"
+          >
             <img src={hero1} alt="" className="absolute -top-12" />
-          </div>
-          <div className="absolute bottom-0 lg:w-[192px] lg:h-[192px] xl:w-[232px] xl:h-[232px] bg-[#e78ffe] rounded-xl  left-0">
+          </motion.div>
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            transition={{ duration: 1.5 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute bottom-0 lg:w-[192px] lg:h-[192px] xl:w-[232px] xl:h-[232px] bg-[#e78ffe] rounded-xl  left-0"
+          >
             <img src={hero2} alt="" className="absolute bottom-0" />
-          </div>
-          <div className="absolute hero3 top-[50%] lg:w-[245px] lg:h-[322px] xl:w-[305px] xl:h-[392px] bg-[#faac3b] rounded-xl  right-0">
+          </motion.div>
+          <motion.div className="absolute hero3 top-[50%] lg:w-[245px] lg:h-[322px] xl:w-[305px] xl:h-[392px] bg-[#faac3b] rounded-xl  right-0">
             <img src={hero3} alt="" className="absolute bottom-0" />
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

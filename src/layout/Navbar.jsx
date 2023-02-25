@@ -35,7 +35,7 @@ const Navbar = () => {
           isScrolled && " "
         }`}
       >
-        <div className="w-full lg:hidden justify-between items-center flex px-4">
+        <div className="w-full md:hidden justify-between items-center flex px-4">
           <h1 className="text-2xl font-bold">clademy</h1>
           <div
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -44,7 +44,7 @@ const Navbar = () => {
             <BiMenu className="w-8 h-8" />
           </div>
         </div>
-        <div className="w-full xl:max-w-[60%] lg:max-w-[70%] relative px-7 h-full overflow-hidden items-center rounded-full bg-white/80 backdrop-blur-md drop-shadow-md border-gray-300 border md:flex hidden justify-between mx-auto">
+        <div className="w-full max-w-[90%] xl:max-w-[60%] lg:max-w-[70%] relative px-7 h-full overflow-hidden items-center rounded-full bg-white/80 backdrop-blur-md drop-shadow-md border-gray-300 border md:flex hidden justify-between mx-auto">
           <div className="absolute w-[5%] -z-10 right-0 bottom-0">
             <img src={dot} alt="" />
           </div>
@@ -69,7 +69,7 @@ const Navbar = () => {
           </div>
           <div className="">
             <Button
-              className="bg-black "
+              className="bg-black"
               onClick={function () {
                 NProgress.start();
                 setTimeout(() => {

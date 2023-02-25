@@ -4,7 +4,8 @@ import { RxEyeClosed, RxEyeOpen } from "react-icons/rx";
 import OnboardingLayout from "../../layout/auth/OnboardingLayout";
 import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
+import Cookies from "js-cookie";
 const Login = () => {
   // inputs value
   const [email, setEmail] = useState("");
@@ -14,6 +15,53 @@ const Login = () => {
   // ui states
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const [message, setMessage] = useState(null);
+
+  const requestBody = {
+    query: `
+        query{
+          login(email:"${email}", password:"${password}"){
+            token
+            email
+            name
+            userId
+            profile
+          }
+        }
+      `,
+  };
+
+  const loginHandler = async (e) => {
+    setLoading(true);
+    try {
+      e.preventDefault();
+      const { data } = await axios.post(
+        "  https://clademy-server.onrender.com/graphql",
+        JSON.stringify(requestBody),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const user = data.data.login;
+      const store = {
+        token: user.token,
+        email: user.email,
+        name: user.name,
+        userId: user.userId,
+      };
+      Cookies.set("user", JSON.stringify(store), { expires: 30 });
+      localStorage.setItem("clademyprofile", user.profile);
+      navigate("/");
+      setLoading(false);
+    } catch (err) {
+      console.log(err);
+      setMessage("Invalid login parameters");
+      setLoading(false);
+    }
+  };
+
   const navigate = useNavigate();
   return (
     <OnboardingLayout>
@@ -26,8 +74,18 @@ const Login = () => {
                 Enter your email and password
               </p>
             </div>
+            <div className="text-center">
+              {message == "Auth successsful" && (
+                <p className="mt-3  text-green-600">{message}</p>
+              )}
+
+              {message && message != "Auth successsful" && (
+                <p className="mt-3  text-red-600">{message}</p>
+              )}
+            </div>
             <div className=" w-full h-full mt-3 space-y-4">
-              <div
+              <form
+                onSubmit={(e) => loginHandler(e)}
                 // onSubmit={onSubmit}
                 className="w-full flex flex-col  space-y-6"
               >
@@ -40,6 +98,10 @@ const Login = () => {
                     </div>
                     <input
                       type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      name="email"
                       placeholder="Email"
                       className="w-full h-[44px] px-2 border bg-white border-[#C8CACE]"
                     />
@@ -53,6 +115,10 @@ const Login = () => {
                     <div className="relative w-full ">
                       <input
                         type={!showPass ? "password" : "text"}
+                        required
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        name="password"
                         placeholder="Password"
                         className="w-full h-[44px] pl-2 pr-10 border bg-white border-[#C8CACE]"
                       />
@@ -86,24 +152,25 @@ const Login = () => {
                 </div>
 
                 <Button
-                  onClick={function () {
-                    setLoading(true);
-                    setTimeout(() => {
-                      setLoading(false);
-                      navigate("/");
-                    }, 3000);
-                  }}
+                  //   onClick={function () {
+                  //     setLoading(true);
+                  //     setTimeout(() => {
+                  //       setLoading(false);
+                  //       navigate("/");
+                  //     }, 3000);
+                  //   }}
+                  type="submit"
                   className="flex w-[446px] h-[60px] text-white font-medium justify-center items-center  rounded-full bg-[black] "
                 >
                   {loading ? (
                     <div className="py-2">
-                      <ClipLoader />
+                      <ClipLoader color="white" />
                     </div>
                   ) : (
                     <h1 className="text-lg font-bold">Sign In</h1>
                   )}
                 </Button>
-              </div>
+              </form>
               <p>
                 Don't have an account?{" "}
                 <a href="/register" className="text-black">
@@ -179,18 +246,18 @@ const Login = () => {
                 </div>
 
                 <Button
-                  onClick={function () {
-                    setLoading(true);
-                    setTimeout(() => {
-                      setLoading(false);
-                      navigate("/");
-                    }, 3000);
-                  }}
+                  //   onClick={function () {
+                  //     setLoading(true);
+                  //     setTimeout(() => {
+                  //       setLoading(false);
+                  //       navigate("/");
+                  //     }, 3000);
+                  //   }}
                   className="flex w-full h-[60px] text-white font-medium justify-center items-center  rounded-full bg-[black] "
                 >
                   {loading ? (
                     <div className="py-2">
-                      <ClipLoader />
+                      <ClipLoader color="white" />
                     </div>
                   ) : (
                     <h1 className="text-lg font-bold">Sign In</h1>
