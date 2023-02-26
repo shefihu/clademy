@@ -2,6 +2,7 @@ import React from "react";
 import About from "../components/Home/About";
 import Hero from "../components/Home/Hero";
 import JoinIn from "../components/Home/JoinIn";
+import Testimonial from "../components/Home/Testimonial";
 import Whatwedo from "../components/Home/Whatwedo";
 import RootLayout from "../layout/RootLayout";
 
@@ -17,6 +18,7 @@ const Home = () => {
         <Whatwedo />
         <About />
         <JoinIn />
+        <Testimonial />
       </RootLayout>
     </div>
   );
