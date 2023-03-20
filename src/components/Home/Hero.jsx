@@ -19,7 +19,7 @@ const Hero = () => {
               learning experiences.
             </p>
             <a
-              href="#_"
+              href="/register"
               class="relative inline-flex mt-10 items-center px-12 py-3 overflow-hidden text-lg font-medium text-black border-2 border-black rounded-full hover:text-white group hover:bg-gray-50"
             >
               <span class="absolute left-0 block w-full h-0 transition-all bg-black opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
