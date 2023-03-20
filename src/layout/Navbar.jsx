@@ -36,10 +36,12 @@ const Navbar = () => {
         }`}
       >
         <div className="w-full md:hidden justify-between items-center flex px-4">
-          <h1 className="text-2xl font-bold">clademy</h1>
+          <a href="/" className="text-2xl font-bold">
+            clademy
+          </a>
           <div
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="w-[50px] h-[50px] lg:hidden flex justify-center items-center rounded-full bg-white/80 backdrop-blur-md drop-shadow-md "
+            className="w-[50px] h-[50px] cursor-pointer lg:hidden flex justify-center items-center rounded-full bg-white/80 backdrop-blur-md drop-shadow-md "
           >
             <BiMenu className="w-8 h-8" />
           </div>
